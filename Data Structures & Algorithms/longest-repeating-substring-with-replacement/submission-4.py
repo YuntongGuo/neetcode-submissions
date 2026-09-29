@@ -1,0 +1,14 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        window = {}
+        maxf = 0
+        result = 0
+        l=0
+        for r in range(len(s)):
+            window[s[r]] = window.get(s[r],0) + 1
+            maxf = max(maxf,window[s[r]])
+            while maxf + k < r-l+1:
+                window[s[l]] = window.get(s[l],0) - 1
+                l += 1
+            result = max(result,r-l+1)
+        return result
